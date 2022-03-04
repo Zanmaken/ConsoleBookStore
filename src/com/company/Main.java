@@ -21,7 +21,7 @@ public class Main {
     public static void homePage() {
         while (true) {
             if (isUserLoggedIn) {
-
+                System.out.println("Test");
             }
             else if (isUserLoggedIn && currentUser.isAdmin) {
 
