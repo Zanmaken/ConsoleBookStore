@@ -8,14 +8,12 @@ import java.io.*;
 
 public class Main {
 
-    public static boolean isUserLoggedIn = false;
-    public static User currentUser = null;
 
     public static void main(String[] args) {
         // write your code here
         System.out.println("\033[H\033[2J");
         System.out.flush();
-        Menu.homePage(isUserLoggedIn, currentUser);
+        Menu.homePage();
 
     }
 }
