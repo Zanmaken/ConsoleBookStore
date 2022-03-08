@@ -5,6 +5,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class User implements Serializable {
     String username;
@@ -42,6 +43,28 @@ public class User implements Serializable {
         }catch (Exception ex){
             ex.printStackTrace();
             return null;
+        }
+    }
+
+    public static User createAccount() {
+        System.out.println("\033[H\033[2J");
+        System.out.flush();
+        Scanner uInput = new Scanner(System.in);
+        System.out.print("Enter your first name: ");
+        String fName = uInput.nextLine();
+        System.out.print("Enter your last name: ");
+        String lName = uInput.nextLine();
+        System.out.print("Enter your username: ");
+        String uName = uInput.nextLine();
+        System.out.print("Enter your password: ");
+        Console cnsl = System.console();
+        if (cnsl != null) {
+            char[] password = cnsl.readPassword();
+            return new User(fName, lName, uName, new String(password), false);
+        }
+        else {
+            String password = uInput.nextLine();
+            return new User(fName, lName, uName, password,false);
         }
     }
 
