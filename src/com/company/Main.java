@@ -107,4 +107,14 @@ public class Main{
         Scanner uInput = new Scanner(System.in);
         String userInput = uInput.nextLine();
     }
+
+    private static int userInputInt(int listLength){
+       Scanner uInput = new Scanner(System.in);
+       int userInput = uInput.nextInt();
+       while(userInput < 1 || userInput > listLength){
+           System.out.print("Number is out of bounds, please enter a number from 1 to " + listLength + ": ");
+           userInput = uInput.nextInt();
+       }
+       return userInput;
+    }
 }
