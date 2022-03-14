@@ -26,11 +26,10 @@ public class User implements Serializable {
         username = uInput.nextLine();
         System.out.print("Enter your password: ");
         Console cnsl = System.console();
-        if (cnsl != null) {
-            char[] password = cnsl.readPassword();
-        } else {
-            String password = uInput.nextLine();
-        }
+        if (cnsl != null)
+            this.password = String.valueOf(cnsl.readPassword());
+        else
+            password = uInput.nextLine();
     }
 
     public void saveUser() {
@@ -42,7 +41,7 @@ public class User implements Serializable {
         }
     }
 
-    public User readUser(){
+    public static User readUser(){
         try{
             FileInputStream fileIn = new FileInputStream("src/com/company/Users.dat");
             ObjectInputStream objectIn = new ObjectInputStream(fileIn);
