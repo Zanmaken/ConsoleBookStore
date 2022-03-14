@@ -16,12 +16,21 @@ public class User implements Serializable {
     double balance;
     ArrayList<Order> orderHistory;
 
-    public User(String fName, String lName, String uName,String uPassword, boolean adminPrivilege){
-        firstName = fName;
-        lastName = lName;
-        username = uName;
-        isAdmin = adminPrivilege;
-        password = uPassword;
+    public User(){
+        Scanner uInput = new Scanner(System.in);
+        System.out.print("Enter your first name: ");
+        firstName = uInput.nextLine();
+        System.out.print("Enter your last name: ");
+        lastName = uInput.nextLine();
+        System.out.print("Enter your username: ");
+        username = uInput.nextLine();
+        System.out.print("Enter your password: ");
+        Console cnsl = System.console();
+        if (cnsl != null) {
+            char[] password = cnsl.readPassword();
+        } else {
+            String password = uInput.nextLine();
+        }
     }
 
     public void saveUser() {
@@ -43,28 +52,6 @@ public class User implements Serializable {
         }catch (Exception ex){
             ex.printStackTrace();
             return null;
-        }
-    }
-
-    public static User createAccount() {
-        System.out.println("\033[H\033[2J");
-        System.out.flush();
-        Scanner uInput = new Scanner(System.in);
-        System.out.print("Enter your first name: ");
-        String fName = uInput.nextLine();
-        System.out.print("Enter your last name: ");
-        String lName = uInput.nextLine();
-        System.out.print("Enter your username: ");
-        String uName = uInput.nextLine();
-        System.out.print("Enter your password: ");
-        Console cnsl = System.console();
-        if (cnsl != null) {
-            char[] password = cnsl.readPassword();
-            return new User(fName, lName, uName, new String(password), false);
-        }
-        else {
-            String password = uInput.nextLine();
-            return new User(fName, lName, uName, password,false);
         }
     }
 
