@@ -1,11 +1,11 @@
 package com.company;
 
-import java.io.Console;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Scanner;
 
-public class Main {
+public class Main{
 
     static ArrayList<String> menuButtons = new ArrayList<>(Arrays.asList("Create account", "Login", "Search for books"));
     static ArrayList<String> menuButtonsLoggedIn = new ArrayList<>(Arrays.asList("Search for Books", "Order History", "Shopping Cart", "Account Settings", "Log out"));
@@ -14,7 +14,7 @@ public class Main {
     public static boolean isUserLoggedIn = false;
     public static User currentUser = null;
 
-    public static void main(String[] args) {
+    public static void main(String[] args){
         // write your code here
         System.out.println("weed");
         System.out.println("\f");
@@ -22,8 +22,9 @@ public class Main {
         homePage();
 
     }
-     private static void homePage() {
-        while (true) {
+
+    private static void homePage(){
+        while(true){
             mainMenuButtons();
             System.out.println("Choose one of the options(Type the number): ");
             Scanner uInput = new Scanner(System.in);
@@ -32,43 +33,43 @@ public class Main {
         }
     }
 
-     private static void mainMenuButtons() {
-        if (isUserLoggedIn) {
+    private static void mainMenuButtons(){
+        if(isUserLoggedIn){
             int x = 1;
-            for (String button : menuButtonsLoggedIn) {
+            for(String button : menuButtonsLoggedIn){
                 System.out.println(x + "." + button);
                 x++;
             }
-        } else if (isUserLoggedIn && currentUser.isAdmin) {
+        } else if(isUserLoggedIn && currentUser.isAdmin){
             int x = 1;
-            for (String button : menuButtonsAdmin) {
+            for(String button : menuButtonsAdmin){
                 System.out.println(x + "." + button);
                 x++;
             }
-        } else {
+        } else{
             int x = 1;
-            for (String button : menuButtons) {
+            for(String button : menuButtons){
                 System.out.println(x + "." + button);
                 x++;
             }
         }
     }
 
-    private static void mainMenuChoice(int userInput) {
-        if (isUserLoggedIn && currentUser.isAdmin) {
-            switch (userInput) {
-                case 1: {
+    private static void mainMenuChoice(int userInput){
+        if(isUserLoggedIn && currentUser.isAdmin){
+            switch(userInput){
+                case 1:{
                     searchForBooksMenu();
                 }
             }
-        } else if (isUserLoggedIn) {
-            switch (userInput) {
-                case 1: {
+        } else if(isUserLoggedIn){
+            switch(userInput){
+                case 1:{
                     searchForBooksMenu();
                 }
             }
-        } else {
-            switch (userInput) {
+        } else{
+            switch(userInput){
                 case 1:
                     currentUser = new User();
                     currentUser.saveUser();
@@ -79,29 +80,29 @@ public class Main {
     }
 
 
-    private static void searchForBooksMenu() {
+    private static void searchForBooksMenu(){
         int x = 1;
-        for (String button : searchBooksButtons) {
+        for(String button : searchBooksButtons){
             System.out.println(x + "." + button);
             x++;
         }
         System.out.println("Choose one of the options above(Type in the number): ");
-        while (true) {
+        while(true){
             Scanner uInput = new Scanner(System.in);
             int userInput = uInput.nextInt();
-            if (userInput > searchBooksButtons.size() || userInput < 1) {
+            if(userInput > searchBooksButtons.size() || userInput < 1){
                 System.out.println("Number is out of bounds, please try again.");
                 continue;
             }
-            switch (userInput) {
-                case 1: {
+            switch(userInput){
+                case 1:{
                     searchBookByName();
                 }
             }
         }
     }
 
-    private static void searchBookByName() {
+    private static void searchBookByName(){
         System.out.print("Type the name of the book: ");
         Scanner uInput = new Scanner(System.in);
         String userInput = uInput.nextLine();
