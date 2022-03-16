@@ -3,6 +3,7 @@ package com.company;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Main {
@@ -158,14 +159,22 @@ public class Main {
     }
 
     private static int userInputInt(int listLength) {  // Gets the user's input for selecting menu buttons
-        Scanner uInput = new Scanner(System.in);       // and returns the choice as an int.
-        int userInput = uInput.nextInt();
-        while (userInput < 1 || userInput > listLength) {
-            System.out.print("Number is out of bounds, please enter a number from 1 to " + listLength + ": ");
+        int userInput;                                 // and returns the choice as an int.
+        Scanner uInput = new Scanner(System.in);
+        try {
             userInput = uInput.nextInt();
+            while (userInput < 1 || userInput > listLength) {
+                System.out.print("Number is out of bounds, please enter a number from 1 to " + listLength + ": ");
+                userInput = userInputInt(listLength);
+            }
+        } catch (InputMismatchException ex){
+                System.out.println("Input must be an integer!!! Please try again: ");
+                userInput = userInputInt(listLength);
         }
         return userInput;
     }
+
+
 
     private static String userInputAsString() {
         Scanner uInput = new Scanner(System.in);
