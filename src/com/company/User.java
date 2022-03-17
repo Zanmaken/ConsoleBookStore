@@ -1,9 +1,6 @@
 package com.company;
 
 import java.io.*;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -17,7 +14,7 @@ public class User implements Serializable {
     ArrayList<Order> orderHistory;
 
     public User(){
-        Scanner uInput = new Scanner(System.in);
+        Scanner uInput = Main.uInput;
         System.out.print("Enter your first name: ");
         firstName = uInput.nextLine();
         System.out.print("Enter your last name: ");
@@ -40,7 +37,6 @@ public class User implements Serializable {
             ex.printStackTrace();
         }
     }
-
     public static User readUser(){
         try{
             FileInputStream fileIn = new FileInputStream("src/com/company/Users.dat");

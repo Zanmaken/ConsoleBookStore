@@ -13,6 +13,7 @@ public class Main {
     static ArrayList<String> menuButtonsAdmin = new ArrayList<>(Arrays.asList("Search for Books", "Manage Users", "Manage Books", "Account Settings", "Log out", "Exit program"));
     static ArrayList<String> searchBooksButtons = new ArrayList<>(Arrays.asList("Search by name", "Search by category", "Search by author"));
     public static User currentUser = null;
+    public static Scanner uInput = new Scanner(System.in).useDelimiter("\\n");
 
     public static void main(String[] args) {
         mainMenu();
@@ -58,6 +59,7 @@ public class Main {
             case 1:
                 currentUser = new User();
                 currentUser.saveUser();
+                User.readUser();
                 System.out.println(currentUser.toString());
                 mainMenu();
                 break;
@@ -120,9 +122,10 @@ public class Main {
         currentUser = null;
         mainMenu();
     }
+
     private static int checkUserLoginStatus() {          // Checks if the user is logged in and has admin privileges
         if (currentUser != null && currentUser.isAdmin)  // then returns 0 for not logged in, 1 for logged in
-            return 2;                                   // and 2 for logged in with admin privileges.
+            return 2;                                    // and 2 for logged in with admin privileges.
         else if (currentUser != null)
             return 1;
         else
@@ -159,25 +162,26 @@ public class Main {
     }
 
     private static int userInputInt(int listLength) {  // Gets the user's input for selecting menu buttons
-        int userInput;                                 // and returns the choice as an int.
-        Scanner uInput = new Scanner(System.in);
-        try {
-            userInput = uInput.nextInt();
-            while (userInput < 1 || userInput > listLength) {
-                System.out.print("Number is out of bounds, please enter a number from 1 to " + listLength + ": ");
-                userInput = userInputInt(listLength);
+        do {                                           // and returns the choice as an int.
+            try {
+                int numInput = uInput.nextInt();
+                uInput.nextLine();
+                if (numInput < 1 || numInput > listLength) {
+                    System.out.println("Number must be from 1 to " + listLength + ". Please try again: ");
+                    continue;
+                }
+                return numInput;
             }
-        } catch (InputMismatchException ex){
+            catch (InputMismatchException ex) {
                 System.out.println("Input must be an integer!!! Please try again: ");
-                userInput = userInputInt(listLength);
-        }
-        return userInput;
+                uInput.next();
+            }
+        } while (true);
     }
 
-
-
     private static String userInputAsString() {
-        Scanner uInput = new Scanner(System.in);
-        return uInput.nextLine();
+        String userInput = uInput.nextLine();
+        uInput.close();
+        return userInput;
     }
 }
