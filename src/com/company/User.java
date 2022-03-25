@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class User implements Serializable {
+    int userID;
     String username;
     String firstName;
     String lastName;
@@ -13,20 +14,19 @@ public class User implements Serializable {
     double balance;
     ArrayList<Order> orderHistory;
 
-    public User(){
-        Scanner uInput = Main.uInput;
-        System.out.print("Enter your first name: ");
-        firstName = uInput.nextLine();
-        System.out.print("Enter your last name: ");
-        lastName = uInput.nextLine();
-        System.out.print("Enter your username: ");
-        username = uInput.nextLine();
-        System.out.print("Enter your password: ");
-        Console cnsl = System.console();
-        if (cnsl != null)
-            this.password = String.valueOf(cnsl.readPassword());
-        else
-            password = uInput.nextLine();
+    public User(String firstName, String lastName, String username, String password){
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.username = username;
+        this.password = password;
+    }
+
+    public User(String firstName, String lastName, String username, String password, boolean isAdmin){
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.username = username;
+        this.password = password;
+        this.isAdmin = isAdmin;
     }
 
     public void saveUser() {

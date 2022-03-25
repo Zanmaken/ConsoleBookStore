@@ -3,9 +3,15 @@ package com.company;
 import java.util.ArrayList;
 
 public class Order {
+    static int orderCount;
     int orderID;
     ArrayList<Book> booksInOrder;
-    int orderSize;
     double shippingCost;
+    int orderUserID;
 
+    public Order() {
+
+    }
 }
+
+
